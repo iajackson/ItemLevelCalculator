@@ -1,5 +1,5 @@
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.*;   // Used for GUI components
+import java.awt.*;      // Used for Layout Manager
 
 public class InputPanel extends JPanel
 {
@@ -27,9 +27,10 @@ public class InputPanel extends JPanel
         ring1 = new JTextField(4);
         ring2 = new JTextField(4);
         
+        // Create the check box
         offHandCheckBox = new JCheckBox("Offhand?");
         
-        // Add the text fields to the panel
+        // Add the text fields and check box to the panel
         add(mainHand);
         add(offHandCheckBox);
         add(helm);
@@ -46,30 +47,43 @@ public class InputPanel extends JPanel
         add(ring2);
     }
     
+    /**
+        Gets and returns the values from the text fields
+        @return An array containing all the text field entries
+    */
     public int[] getValues()
     {
         String[] strItemLevels = new String[13];
         int[] itemLevels = new int[13];
-        strItemLevels[0] = mainHand.getText();
-        if (offHandCheckBox.isSelected())
-            strItemLevels[1] = offHand.getText();
-        else
-            strItemLevels[1] = mainHand.getText();
-        strItemLevels[2] = helm.getText();
-        strItemLevels[3] = chest.getText();
-        strItemLevels[4] = gloves.getText();
-        strItemLevels[5] = belt.getText();
-        strItemLevels[6] = legs.getText();
-        strItemLevels[7] = feet.getText();
-        strItemLevels[8] = ears.getText();
-        strItemLevels[9] = neck.getText();
-        strItemLevels[10] = wrist.getText();
-        strItemLevels[11] = ring1.getText();
-        strItemLevels[12] = ring2.getText();
-        for (int i=0; i<13; i++)
+        try
         {
-            itemLevels[i] = Integer.parseInt(strItemLevels[i]);
+            strItemLevels[0] = mainHand.getText();
+            if (offHandCheckBox.isSelected())
+                strItemLevels[1] = offHand.getText();
+            else
+                strItemLevels[1] = mainHand.getText();
+            strItemLevels[2] = helm.getText();
+            strItemLevels[3] = chest.getText();
+            strItemLevels[4] = gloves.getText();
+            strItemLevels[5] = belt.getText();
+            strItemLevels[6] = legs.getText();
+            strItemLevels[7] = feet.getText();
+            strItemLevels[8] = ears.getText();
+            strItemLevels[9] = neck.getText();
+            strItemLevels[10] = wrist.getText();
+            strItemLevels[11] = ring1.getText();
+            strItemLevels[12] = ring2.getText();
+            for (int i=0; i<13; i++)
+            {
+                itemLevels[i] = Integer.parseInt(strItemLevels[i]);
+            }
+            return itemLevels;
         }
-        return itemLevels;
+        catch (NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(null, "Missing values");
+            return null;
+        }
+        
     }
 }
