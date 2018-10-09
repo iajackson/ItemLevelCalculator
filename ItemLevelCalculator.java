@@ -1,4 +1,4 @@
-/*
+/**
     Tool used to calculate the average iLvl of all equipped gear in FFXIV
 */
 
@@ -10,13 +10,13 @@ import java.awt.event.*;    // Used for Event Listeners
 
 public class ItemLevelCalculator extends JFrame
 {
-    private InputPanel inputs;              // Contains all input items
-    private JButton calcButton;             // Calculate button
-    private JButton saveButton;             // Save button
-    private JButton loadButton;             // Load button
-    private JPanel buttonPanel;             // Contains all buttons
-    private JPanel labelPanel;              // Contains the labels with result
-    private JLabel iLvlResult;              // Label with the result
+    private InputPanel inputs;      // Contains all input items
+    private JButton calcButton;     // Calculate button
+    private JButton saveButton;     // Save button
+    private JButton loadButton;     // Load button
+    private JPanel buttonPanel;     // Contains all buttons
+    private JPanel labelPanel;      // Contains the labels with result
+    private JLabel iLvlResult;      // Label with the result
     
     /**
         Constructor
@@ -102,17 +102,15 @@ public class ItemLevelCalculator extends JFrame
         public void actionPerformed(ActionEvent e)
         {
             int values[] = inputs.getValues();
-            int sum = 0;
-            double average;
             if (values != null)
             {
+                int sum = 0;
                 for (int val : values)
                 {
                     sum += val;
                 }
-                average = sum / 13.0;
                 //JOptionPane.showMessageDialog(null, average);
-                iLvlResult.setText(String.format("The calculated iLvl is: %.2f", average));
+                iLvlResult.setText(String.format("The calculated iLvl is: %.2f", (sum / 13.0)));
             }
         }
     }
