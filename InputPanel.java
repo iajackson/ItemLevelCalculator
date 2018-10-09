@@ -1,12 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class TextFieldPanel extends JPanel
+public class InputPanel extends JPanel
 {
     private JTextField mainHand, offHand, helm, chest, gloves, belt, legs, feet, ears, neck, wrist, ring1, ring2;
     private JCheckBox offHandCheckBox;
     
-    public TextFieldPanel()
+    public InputPanel()
     {
         // Create a GridLayout manager with 
         // seven rows and two columns.

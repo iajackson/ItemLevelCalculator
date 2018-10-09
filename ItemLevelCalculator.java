@@ -10,7 +10,7 @@ import java.awt.event.*;    // Used for Event Listeners
 
 public class ItemLevelCalculator extends JFrame
 {
-    private TextFieldPanel textFields;      // Contains all text fields
+    private InputPanel inputs;      // Contains all text fields
     private JButton calcButton;             // Calculate button
     private JButton saveButton;             // Save button
     private JButton loadButton;             // Load button
@@ -33,7 +33,7 @@ public class ItemLevelCalculator extends JFrame
         setLayout(new BorderLayout());
         
         // Create text field panel
-        textFields = new TextFieldPanel();
+        inputs = new InputPanel();
         
         // Create button panel
         buildActionPanel();
@@ -41,7 +41,7 @@ public class ItemLevelCalculator extends JFrame
         buildLabelPanel();
         
         //Add components to content pane
-        add(textFields, BorderLayout.CENTER);
+        add(inputs, BorderLayout.CENTER);
         add(actionPanel, BorderLayout.EAST);
         add(labelPanel, BorderLayout.SOUTH);
         
@@ -90,7 +90,7 @@ public class ItemLevelCalculator extends JFrame
     {
         public void actionPerformed(ActionEvent e)
         {
-            int values[] = textFields.getValues();
+            int values[] = inputs.getValues();
             int sum = 0;
             double average;
             for (int val : values)
