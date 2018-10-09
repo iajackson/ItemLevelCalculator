@@ -1,6 +1,8 @@
 /**
     Tool used to calculate the average iLvl of all equipped gear in FFXIV
 */
+// TODO: Include more comments
+// TODO: Change data saving/loading to binary
 
 import java.util.Scanner;
 import java.io.*;
@@ -38,6 +40,7 @@ public class ItemLevelCalculator extends JFrame
         // Create button panel
         buildButtonPanel();
         
+        // Create label panel
         buildLabelPanel();
         
         //Add components to content pane
@@ -123,7 +126,24 @@ public class ItemLevelCalculator extends JFrame
     {
         public void actionPerformed(ActionEvent e)
         {
-            JOptionPane.showMessageDialog(null, "Save not yet implemented");
+            int values[] = inputs.getValues();
+            if (values != null)
+            {
+                try
+                {
+                    PrintWriter outStream = new PrintWriter("data.txt");
+                    for (int value : values)
+                    {
+                        outStream.println(value);
+                    }
+                    outStream.close();
+                }
+                catch (IOException ex)
+                {
+                    JOptionPane.showMessageDialog(null, "Bad file");
+                }
+                
+            }
         }
     }
     
@@ -135,55 +155,31 @@ public class ItemLevelCalculator extends JFrame
     {
         public void actionPerformed(ActionEvent e)
         {
-            JOptionPane.showMessageDialog(null, "Load not yet implemented");
+            try
+            {
+                String[] inValues = new String[13];
+                int counter = 0;
+                File inFile = new File("data.txt");
+                Scanner inScan = new Scanner(inFile);
+                while (inScan.hasNext())
+                {
+                    inValues[counter] = inScan.nextLine();
+                    counter++;
+                }
+                inputs.setValues(inValues);
+            }
+            catch (IOException ex)
+            {
+                JOptionPane.showMessageDialog(null, "Bad file");
+            }
         }
     }
     
     /**
         Main method
     */
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args)
     {
         new ItemLevelCalculator();
-    }
-
-    /*
-        #####################################
-        METHODS BELOW HERE NOT CURRENTLY USED
-        #####################################
-    */
-    
-    /**
-        Save the current values to file
-        @param values The values to save to file
-    */
-    //TODO: Update to output to binary file
-    private static void saveValues(int[] values) throws IOException
-    {
-        PrintWriter out = new PrintWriter("data.txt");
-        for (int value : values)
-        {
-            out.println(value);
-        }
-        out.close();
-    }
-    
-    /**
-        Load values from file
-        @return The values loaded from file
-    */
-    //TODO: Update to input from binary file
-    private static int[] loadValues() throws IOException
-    {
-        int[] values = new int[13];
-        int counter = 0;
-        File inFile = new File("data.txt");
-        Scanner inScan = new Scanner(inFile);
-        while (inScan.hasNext())
-        {
-            values[counter] = inScan.nextInt();
-            counter++;
-        }
-        return values;
     }
 }
